@@ -16,7 +16,6 @@ const post = async (baseURL, url, headers, data) => {
 
 const baseRequest = async (url, type, obj = {}) => {
     try {
-        var type = type;
         var token = (Crypto.encrypt(JSON.stringify({ expire: getUTCTime(opts.tokenTimeout).toString(), type }), opts.publicKey, opts.privateKey));
         var result = await post(opts.wooServerUrl, url, {
             public: opts.publicKey,
