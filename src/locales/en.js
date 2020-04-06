@@ -4,7 +4,8 @@ export default {
         noData: 'There are no notifications.'
     },
     alertbox: {
-        done: 'Done'
+        done: 'Done',
+        show: 'Go'
     },
     settings: {
         changeNotificationStatus: 'Notifications'

@@ -55,8 +55,8 @@ export default class Notification extends Component {
     }
 
     openDetail = (url) => {
-        if (this.props.onPressToItem)
-            this.props.onPressToItem(url);
+        if (this.props.openDetail)
+            this.props.openDetail(url);
     }
 
     handleRefresh = () => {

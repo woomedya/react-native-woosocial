@@ -4,7 +4,8 @@ export default {
         noData: 'Bildirim bulunmamaktadır.'
     },
     alertbox: {
-        done: 'Tamam'
+        done: 'Tamam',
+        show: 'Git'
     },
     settings: {
         changeNotificationStatus: 'Bildirimler'

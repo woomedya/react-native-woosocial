@@ -85,34 +85,52 @@ export default class WooSocialAlert extends React.Component {
 
     alertClose = () => {
         this.setState({ notificationVisible: false, notificationData: null });
-    };
+    }
+
+    openDetail = () => {
+        if (this.props.openDetail)
+            this.props.openDetail(this.state.notificationData.Url);
+    }
+
+    renderContent = () => {
+        return this.props.renderContent ? this.props.renderContent(this.state) : <View>
+            {this.state.notificationData.Image ? (
+                <Image
+                    resizeMode="contain"
+                    style={style.alertImage}
+                    source={{ uri: this.state.notificationData.Image }}
+                    placeholderStyle={style.alertPlaceholder}
+                    PlaceholderContent={
+                        <ImageReact
+                            resizeMode="contain"
+                            source={opts.logo}
+                            style={style.alertPlaceholderImage}
+                        />
+                    }
+                />
+            ) : null}
+
+            <Text>{this.state.notificationData.Message}</Text>
+        </View>
+    }
+
+    renderLeftButton = () => {
+        return this.props.renderLeftButton ? this.props.renderLeftButton(this.state) : this.state.notificationData.Url ? (
+            <Button
+                onPress={this.openDetail}
+                title={this.state.i18n.alertbox.show}
+                color={opts.color.PRIMARY}
+            />
+        ) : null;
+    }
 
     render() {
         return this.state.notificationVisible ? (
             <AlertBox
                 title={this.state.notificationData.Title}
                 closeButtonFunc={this.alertClose}
-                content={
-                    <View>
-                        {this.state.notificationData.Image ? (
-                            <Image
-                                resizeMode="contain"
-                                style={style.alertImage}
-                                source={{ uri: this.state.notificationData.Image }}
-                                placeholderStyle={style.alertPlaceholder}
-                                PlaceholderContent={
-                                    <ImageReact
-                                        resizeMode="contain"
-                                        source={opts.logo}
-                                        style={style.alertPlaceholderImage}
-                                    />
-                                }
-                            />
-                        ) : null}
-
-                        <Text>{this.state.notificationData.Message}</Text>
-                    </View>
-                }
+                content={this.renderContent()}
+                leftButton={this.renderLeftButton()}
             />
         ) : null;
     }
