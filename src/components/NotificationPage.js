@@ -71,10 +71,10 @@ export default class Notification extends Component {
 
     renderItem = ({ item }) => {
         return opts.renderItem ? opts.renderItem(item) : <NotificationCard
-            url={item.url}
+            url={item.link}
             title={item.title}
             message={item.message}
-            date={item.date}
+            date={item.createdDate}
             image={item.image}
             onpress={this.openDetail}
             urlDescription={this.state.i18n.notification.urlDescription}
