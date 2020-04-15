@@ -1,6 +1,6 @@
 {
   "name": "react-native-woosocial",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,11 +16,12 @@
     "react-native-onesignal": "^3.6.4"
   },
   "dependencies": {
-    "react-native-fast-image": "^8.1.2",
-    "react-native-timeago": "^0.5.0",
+    "axios": "^0.19.2",
     "judel": "^1.0.2",
     "jutore": "^1.0.0",
-    "axios": "^0.19.2",
+    "react-native-fast-image": "^8.1.2",
+    "react-native-responsive-screen": "^1.4.1",
+    "react-native-timeago": "^0.5.0",
     "woo-utilities": "^1.0.11"
   }
 }

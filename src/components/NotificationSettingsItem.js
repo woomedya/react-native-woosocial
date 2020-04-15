@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { StyleSheet, Dimensions } from 'react-native';
+import { ListItem, Icon } from 'react-native-elements';
 import * as settingsRepo from '../repositories/settings';
 import * as onesignalUtil from '../utilities/onesignal';
 import i18n from '../locales';
 import * as langStore from '../store/language';
+import { ListItem, Icon } from 'react-native-elements';
+import { color, font } from '../../constants/ThemeStyle';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
+
+const font = {
+    FONT_SIZE_MEDIUM: fontsize(14),
+    FONT_WEIGHT_BOLD: '700'
+};
+
+function fontsize(value) {
+    return value * Dimensions.get('window').width / 411;
+}
 
 const color = {
     EMERALD: '#2ecc71', // Cırtlak Yeşil
@@ -54,9 +67,18 @@ export default class NotificationSettingsItem extends Component {
         onesignalUtil.sendGeneralNotification(value);
     };
 
+    renderIcon = (name, color, type) => {
+        return <Icon
+            iconStyle={styles.itemLeftAvatarImage}
+            name={name}
+            color={color}
+            type={type}
+        />
+    }
+
     render() {
         return <ListItem
-            leftIcon={{ name: 'notifications', type: 'material', color: color.ALIZARIN }}
+            leftElement={this.renderIcon("notifications", color.ALIZARIN, 'material')}
             title={this.state.i18n.settings.changeNotificationStatus}
             checkmark={
                 this.state.notificationSwitchValue
@@ -65,8 +87,21 @@ export default class NotificationSettingsItem extends Component {
             }
             bottomDivider
             onPress={this.toggleNotificationSwitchValue}
+            contentContainerStyle={styles.itemContainerStyle}
+            titleStyle={styles.itemTitleStyle}
         />
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    itemLeftAvatarImage: {
+        fontSize: wp(5.5)
+    },
+    itemTitleStyle: {
+        fontWeight: font.FONT_WEIGHT_BOLD,
+        fontSize: font.FONT_SIZE_MEDIUM
+    },
+    itemContainerStyle: {
+        paddingVertical: wp(4),
+    },
+});
