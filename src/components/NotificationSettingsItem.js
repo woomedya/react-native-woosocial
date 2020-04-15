@@ -67,7 +67,7 @@ export default class NotificationSettingsItem extends Component {
 
     renderIcon = (name, color, type) => {
         return <Icon
-            iconStyle={styles.itemLeftAvatarImage}
+            iconStyle={this.props.iconStyle || styles.itemLeftAvatarImage}
             name={name}
             color={color}
             type={type}
@@ -85,8 +85,8 @@ export default class NotificationSettingsItem extends Component {
             }
             bottomDivider
             onPress={this.toggleNotificationSwitchValue}
-            contentContainerStyle={styles.itemContainerStyle}
-            titleStyle={styles.itemTitleStyle}
+            contentContainerStyle={this.props.contentContainerStyle || styles.itemContainerStyle}
+            titleStyle={this.props.titleStyle || styles.itemTitleStyle}
         />
     }
 }
@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
         fontSize: font.FONT_SIZE_MEDIUM
     },
     itemContainerStyle: {
-        paddingVertical: wp(4),
+        paddingVertical: wp(1),
     },
 });
