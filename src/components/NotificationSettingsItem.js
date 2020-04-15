@@ -80,8 +80,8 @@ export default class NotificationSettingsItem extends Component {
             title={this.state.i18n.settings.changeNotificationStatus}
             checkmark={
                 this.state.notificationSwitchValue
-                    ? { type: 'antdesign', name: 'check', color: color.EMERALD }
-                    : { type: 'antdesign', name: 'close', color: color.ALIZARIN }
+                    ? this.renderIcon("check", color.EMERALD, 'antdesign')
+                    : this.renderIcon("close", color.ALIZARIN, 'antdesign')
             }
             bottomDivider
             onPress={this.toggleNotificationSwitchValue}
