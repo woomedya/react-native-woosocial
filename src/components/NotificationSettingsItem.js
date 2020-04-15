@@ -5,8 +5,6 @@ import * as settingsRepo from '../repositories/settings';
 import * as onesignalUtil from '../utilities/onesignal';
 import i18n from '../locales';
 import * as langStore from '../store/language';
-import { ListItem, Icon } from 'react-native-elements';
-import { color, font } from '../../constants/ThemeStyle';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
