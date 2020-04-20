@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image as ImageReact } from 'react-native';
+import { StyleSheet, Button, Text, View, Image as ImageReact } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import * as onesignalUtil from '../utilities/onesignal';
 import AlertBox from './AlertBox';
@@ -7,6 +7,7 @@ import { Image } from 'react-native-elements';
 import opts from '../../config';
 import * as langStore from '../store/language';
 import * as settingsRepo from '../repositories/settings';
+import i18n from '../locales';
 
 export default class WooSocialAlert extends React.Component {
     constructor(props) {
@@ -16,6 +17,7 @@ export default class WooSocialAlert extends React.Component {
     }
 
     state = {
+        i18n: i18n(),
         notificationVisible: false,
         notificationData: null,
     };
@@ -88,6 +90,7 @@ export default class WooSocialAlert extends React.Component {
     }
 
     openDetail = () => {
+        this.alertClose()
         if (this.props.openDetail)
             this.props.openDetail(this.state.notificationData.Url);
     }
