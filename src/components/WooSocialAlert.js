@@ -76,6 +76,8 @@ export default class WooSocialAlert extends React.Component {
     };
 
     notificationControl = async () => {
+        await firebase.notifications().setBadge(0);
+
         if (!this.notificationControlStatus)
             return;
 
@@ -100,15 +102,8 @@ export default class WooSocialAlert extends React.Component {
                             }
                         }
                     });
-
-                } else {
-                    await firebase.notifications().setBadge(0);
                 }
-            } else {
-                await firebase.notifications().setBadge(0);
             }
-        } else {
-            await firebase.notifications().setBadge(0);
         }
     }
 
