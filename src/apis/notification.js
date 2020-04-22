@@ -40,5 +40,5 @@ export const getNotificationList = async ({
     });
     var list = result.data || [];
     return list.length ? list :
-        opts.dummyNotificationlist.length ? opts.dummyNotificationlist : [];
+        opts.dummyNotificationlist.length ? (createdDate ? [] : opts.dummyNotificationlist) : [];
 }
