@@ -51,7 +51,7 @@ export default class Notification extends Component {
 
     getNotificationList = async () => {
         var lang = langStore.getLanguage();
-        return await notificationApi.getNotificationList(lang);
+        return await notificationApi.getNotificationList({ lang });
     }
 
     openDetail = (url) => {
@@ -92,7 +92,6 @@ export default class Notification extends Component {
             {this.renderNoText()}
 
             <FlatList
-                contentContainerStyle={styles.container}
                 numColumns={2}
                 keyExtractor={this.itemKey}
                 refreshing={this.state.refreshing}

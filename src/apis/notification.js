@@ -30,9 +30,13 @@ const baseRequest = async (url, type, obj = {}) => {
     }
 }
 
-export const getNotificationList = async (lang) => {
+export const getNotificationList = async ({
+    lang,
+    createdDate
+} = { lang: null, createdDate: null }) => {
     var result = await baseRequest('/notification/unread', 'notification.unread', {
-        lang
+        lang,
+        createdDate
     });
     var list = result.data || [];
     return list.length ? list :

@@ -11,7 +11,8 @@ const settingsModel = repo.create("woosocial_settings");
 
 var defaultSettings = {
     startupOnesignal: true,
-    notification: true
+    notification: true,
+    lastNotificationDate: ''
 };
 
 var cacheValue = null;
@@ -50,4 +51,13 @@ export const getStartupOnesignal = async () => {
 
 export const setStartupOnesignal = async () => {
     await set("startupOnesignal", true);
+}
+
+export const getLastNotificationDate = async () => {
+    var value = await get();
+    return value.lastNotificationDate;
+}
+
+export const setLastNotificationDate = async (value) => {
+    await set('lastNotificationDate', value);
 }

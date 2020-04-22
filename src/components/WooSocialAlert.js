@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View, Image as ImageReact } from 'react-native';
+import {
+    StyleSheet, Button, Text, View, AppState, Image as ImageReact
+} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import * as onesignalUtil from '../utilities/onesignal';
 import AlertBox from './AlertBox';
@@ -8,19 +10,23 @@ import opts from '../../config';
 import * as langStore from '../store/language';
 import * as settingsRepo from '../repositories/settings';
 import i18n from '../locales';
+const firebase = require('react-native-firebase');
+import * as notificationApi from '../apis/notification';
 
 export default class WooSocialAlert extends React.Component {
     constructor(props) {
         super(props);
 
         this.oneSignal = null;
-    }
+        this.notificationControlStatus = true;
+        this.lastScreenState = AppState.currentState;
 
-    state = {
-        i18n: i18n(),
-        notificationVisible: false,
-        notificationData: null,
-    };
+        this.state = {
+            i18n: i18n(),
+            notificationVisible: false,
+            notificationData: null,
+        };
+    }
 
     async componentDidMount() {
         this.oneSignal = new onesignalUtil.default({
@@ -30,12 +36,16 @@ export default class WooSocialAlert extends React.Component {
         });
 
         langStore.default.addListener(langStore.LANG, this.langChanged);
+        AppState.addEventListener('change', this.screenChanged);
+
+        this.notificationControl();
     }
 
     componentWillUnmount() {
         this.oneSignal.removeOnesignalEventListener();
 
         langStore.default.removeListener(langStore.LANG, this.langChanged);
+        AppState.removeEventListener('change', this.screenChanged);
     }
 
     langChanged = () => {
@@ -56,11 +66,65 @@ export default class WooSocialAlert extends React.Component {
     };
 
     recievedMessageOnOpened = (e) => {
+        this.notificationControlStatus = false;
         this.onNotificationSave(e);
     };
 
     recievedMessageWhileOpened = (e) => {
+        this.notificationControlStatus = false;
         this.onNotificationSave(e);
+    };
+
+    notificationControl = async () => {
+        if (!this.notificationControlStatus)
+            return;
+
+        let isNotificationOpen = await settingsRepo.getNotification();
+
+        if (isNotificationOpen) {
+            let createdDate = await settingsRepo.getLastNotificationDate();
+
+            if (createdDate) {
+                let lastNotification = (await notificationApi.getNotificationList({ createdDate }))[0];
+
+                if (lastNotification) {
+                    this.onNotificationSave({
+                        notification: {
+                            payload: {
+                                title: lastNotification.title,
+                                body: lastNotification.message,
+                                additionalData: {
+                                    url: lastNotification.link,
+                                    image: lastNotification.image
+                                }
+                            }
+                        }
+                    });
+
+                } else {
+                    await firebase.notifications().setBadge(0);
+                }
+            } else {
+                await firebase.notifications().setBadge(0);
+            }
+        } else {
+            await firebase.notifications().setBadge(0);
+        }
+    }
+
+    screenChanged = nextState => {
+        if (nextState.match(/inactive|background/)) {
+            settingsRepo.setLastNotificationDate(new Date().toISOString());
+        }
+
+        if (
+            this.lastScreenState.match(/inactive|background/) &&
+            nextState === 'active'
+        ) {
+            this.notificationControl();
+        }
+
+        this.lastScreenState = nextState;
     };
 
     onNotificationSave = async (e) => {
@@ -87,6 +151,7 @@ export default class WooSocialAlert extends React.Component {
 
     alertClose = () => {
         this.setState({ notificationVisible: false, notificationData: null });
+        this.notificationControlStatus = true;
     }
 
     openDetail = () => {
