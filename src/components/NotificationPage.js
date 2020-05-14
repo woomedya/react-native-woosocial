@@ -92,6 +92,7 @@ export default class Notification extends Component {
             {this.renderNoText()}
 
             <FlatList
+                contentContainerStyle={{ padding: 10, }}
                 numColumns={2}
                 keyExtractor={this.itemKey}
                 refreshing={this.state.refreshing}

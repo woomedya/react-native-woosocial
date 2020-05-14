@@ -5,7 +5,7 @@ import TimeAgo from 'react-native-timeago';
 import TimeoutAvatar from './TimeoutAvatar';
 import opts from '../../config';
 
-const width = Dimensions.get('window').width / 2 - 5;
+const width = Dimensions.get('window').width;
 
 export default class NotificationCard extends Component {
     constructor(props) {
@@ -71,12 +71,14 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        margin: 3,
-        justifyContent: "space-around",
-        width: width,
-        height: width / 3 * 4,
+        flex: 1,
+        margin: 5,
+        justifyContent: "space-between",
+        width: width / 2,
+        height: width / 2 * 1.3,
         borderWidth: 0.75,
-        borderColor: opts.color.LIGHT_PRIMARY
+        borderColor: opts.color.LIGHT_PRIMARY,
+        overflow: "hidden"
     },
     imageContainer: {
         flex: 4,
@@ -95,12 +97,12 @@ const styles = StyleSheet.create({
     },
     imageBlur: {
         height: '100%',
-        width: width,
+        width: width / 2,
         flex: 1,
     },
     image: {
         position: "absolute",
-        width: width,
+        width: width / 2,
         height: "100%"
     },
     bodyContent: {

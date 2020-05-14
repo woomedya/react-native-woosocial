@@ -10,7 +10,6 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 const font = {
     FONT_SIZE_MEDIUM: fontsize(14),
-    FONT_WEIGHT_BOLD: '700'
 };
 
 function fontsize(value) {
