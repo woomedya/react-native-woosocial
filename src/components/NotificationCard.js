@@ -20,8 +20,8 @@ export default class NotificationCard extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <TouchableOpacity onPress={this.onpress} style={styles.flex}>
+            <View style={styles.flex}>
+                <TouchableOpacity onPress={this.onpress} style={styles.container}>
                     {
                         this.props.image ? <View style={styles.imageContainer}>
                             <Image
@@ -68,13 +68,13 @@ export default class NotificationCard extends Component {
 
 const styles = StyleSheet.create({
     flex: {
-        flex: 1
+        flex: 1,
+        paddingTop: 10
     },
     container: {
-        flex: 1,
-        margin: 5,
+        marginHorizontal: 5,
         justifyContent: "space-between",
-        width: width / 2,
+        width: width / 2 - 20,
         height: width / 2 * 1.3,
         borderWidth: 0.75,
         borderColor: opts.color.LIGHT_PRIMARY,
