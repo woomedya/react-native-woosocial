@@ -130,12 +130,17 @@ export default class WooSocialAlert extends React.Component {
             notification = e;
         }
 
+        var payload = notification.payload || {};
+        var additionalData = payload.additionalData || {};
+        var rawpayload = payload.rawpayload || {};
+        var att = rawpayload.att || {};
+
         var nofificationItem = {
-            Title: notification.payload.title,
-            Message: notification.payload.body,
+            Title: payload.title,
+            Message: payload.body,
             Date: new Date().toISOString(),
-            Image: notification.payload.additionalData.image || notification.payload.rawpayload.bigPicture || notification.payload.rawpayload.att.id || "",
-            Url: notification.payload.additionalData.url
+            Image: additionalData.image || rawpayload.bigPicture || att.id || "",
+            Url: additionalData.url
         };
 
         this.setState({
