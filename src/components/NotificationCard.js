@@ -21,9 +21,9 @@ export default class NotificationCard extends Component {
     render() {
         return (
             <View style={styles.flex}>
-                <TouchableOpacity onPress={this.onpress} style={styles.container}>
+                <TouchableOpacity onPress={this.onpress} style={[styles.container, { borderColor: opts.color.LIGHT_PRIMARY, }]}>
                     {
-                        this.props.image ? <View style={styles.imageContainer}>
+                        this.props.image ? <View style={[styles.imageContainer, { backgroundColor: opts.color.PRIMARY }]}>
                             <Image
                                 style={styles.imageBlur}
                                 source={{ uri: this.props.image }}
@@ -36,7 +36,7 @@ export default class NotificationCard extends Component {
                                 style={styles.image}
                             />
                         </View> :
-                            <View style={styles.imageContainer}>
+                            <View style={[styles.imageContainer, { backgroundColor: opts.color.PRIMARY }]}>
                                 <Image
                                     style={styles.imageLogo}
                                     source={opts.logo}
@@ -50,12 +50,12 @@ export default class NotificationCard extends Component {
                         </View>
                         <View style={styles.actionBody}>
                             <View style={styles.dateContainer}>
-                                <TimeAgo style={styles.date} time={this.props.date ? this.props.date : ""} hideAgo={true} />
+                                <TimeAgo style={[styles.date, { color: opts.color.PRIMARY, }]} time={this.props.date ? this.props.date : ""} hideAgo={true} />
                             </View>
 
                             {
                                 this.props.url ? <View style={styles.continueContainer}>
-                                    <Text style={styles.continue}>{this.props.urlDescription}</Text>
+                                    <Text style={[styles.continue, { color: opts.color.PRIMARY, }]}>{this.props.urlDescription}</Text>
                                 </View> : null
                             }
                         </View>
@@ -77,14 +77,13 @@ const styles = StyleSheet.create({
         width: width / 2 - 20,
         height: width / 2 * 1.3,
         borderWidth: 0.75,
-        borderColor: opts.color.LIGHT_PRIMARY,
+
         overflow: "hidden"
     },
     imageContainer: {
         flex: 4,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: opts.color.PRIMARY
     },
     textContainer: {
         flex: 5,
@@ -133,14 +132,13 @@ const styles = StyleSheet.create({
         height: 36,
     },
     date: {
-        color: opts.color.PRIMARY,
+
         fontSize: 12
     },
     continueContainer: {
         height: 36,
     },
     continue: {
-        color: opts.color.PRIMARY,
         fontSize: 12
     }
 });
