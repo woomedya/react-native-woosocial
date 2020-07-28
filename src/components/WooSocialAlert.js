@@ -89,6 +89,13 @@ export default class WooSocialAlert extends React.Component {
             if (createdDate) {
                 let lastNotification = (await notificationApi.getNotificationList({ createdDate }))[0];
 
+                var lastSpecialNotification = null;
+
+                if (this.props.getSpecialNotification)
+                    lastSpecialNotification = await this.props.getSpecialNotification({ createdDate });
+
+                lastNotification = lastNotification ? (lastSpecialNotification ? (new Date(lastNotification.date) > new Date(lastSpecialNotification.date) ? lastNotification : lastSpecialNotification) : lastNotification) : lastSpecialNotification;
+
                 if (lastNotification) {
                     this.onNotificationSave({
                         notification: {
