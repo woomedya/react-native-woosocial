@@ -92,8 +92,9 @@ export default class Notification extends Component {
             {this.renderNoText()}
 
             <FlatList
+                key={this.props.numColumns || "notification"}
                 contentContainerStyle={{ padding: 10, }}
-                numColumns={2}
+                numColumns={this.props.numColumns || 2}
                 keyExtractor={this.itemKey}
                 refreshing={this.state.refreshing}
                 onRefresh={this.handleRefresh}
