@@ -5,7 +5,6 @@ import TimeAgo from 'react-native-timeago';
 import TimeoutAvatar from './TimeoutAvatar';
 import opts from '../../config';
 
-const width = Dimensions.get('window').width;
 
 export default class NotificationCard extends Component {
     constructor(props) {
@@ -24,11 +23,14 @@ export default class NotificationCard extends Component {
                 <TouchableOpacity onPress={this.onpress} style={[styles.container, { borderColor: opts.color.LIGHT_PRIMARY, }]}>
                     {
                         this.props.image ? <View style={[styles.imageContainer, { backgroundColor: opts.color.PRIMARY }]}>
-                            <Image
-                                style={styles.imageBlur}
-                                source={{ uri: this.props.image }}
-                                blurRadius={20}
-                                resizeMode="stretch" />
+                            <View style={styles.imageBlur}>
+                                <Image
+                                    style={styles.imageBlur}
+                                    source={{ uri: this.props.image }}
+                                    blurRadius={20}
+                                    resizeMode="stretch" />
+                            </View>
+
                             <TimeoutAvatar
                                 resizeMode="contain"
                                 source={{ uri: this.props.image }}
@@ -74,14 +76,14 @@ const styles = StyleSheet.create({
     container: {
         marginHorizontal: 5,
         justifyContent: "space-between",
-        width: width / 2 - 20,
-        height: width / 2 * 1.3,
+
         borderWidth: 0.75,
 
         overflow: "hidden"
     },
     imageContainer: {
-        flex: 4,
+        height: 90,
+        width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -89,20 +91,21 @@ const styles = StyleSheet.create({
         flex: 5,
     },
     imageLogo: {
-        height: 90,
-        width: 100,
+        height: 50,
+        width: 70,
         justifyContent: 'center',
-        tintColor: '#FFFFFF'
+        tintColor: '#FFFFFF',
     },
     imageBlur: {
-        height: '100%',
-        width: width / 2,
-        flex: 1,
+        height: "100%",
+        width: "100%",
+        resizeMode: 'stretch',
     },
     image: {
         position: "absolute",
-        width: width / 2,
-        height: "100%"
+        height: "100%",
+        width: "100%",
+
     },
     bodyContent: {
         justifyContent: "flex-start",
