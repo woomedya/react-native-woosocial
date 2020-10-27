@@ -10,7 +10,6 @@ import opts from '../../config';
 import * as langStore from '../store/language';
 import * as settingsRepo from '../repositories/settings';
 import i18n from '../locales';
-const firebase = require('react-native-firebase');
 import * as notificationApi from '../apis/notification';
 
 export default class WooSocialAlert extends React.Component {
@@ -76,7 +75,7 @@ export default class WooSocialAlert extends React.Component {
     };
 
     notificationControl = async () => {
-        await firebase.notifications().setBadge(0);
+
 
         if (!this.notificationControlStatus)
             return;
