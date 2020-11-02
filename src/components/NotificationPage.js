@@ -16,7 +16,7 @@ export default class Notification extends Component {
             i18n: i18n(),
             notificationsList: [],
             initial: false,
-            refreshing: false
+            refreshing: true
         };
     }
 
@@ -32,7 +32,8 @@ export default class Notification extends Component {
 
     refresh = async () => {
         this.setState({
-            initial: false
+            initial: false,
+            refreshing: true
         });
 
         var notificationsList = await this.getNotificationList();
@@ -59,12 +60,6 @@ export default class Notification extends Component {
             this.props.openDetail(url);
     }
 
-    handleRefresh = () => {
-        this.setState({
-            refreshing: true
-        }, this.refresh);
-    }
-
     keyItem = (item, index) => {
         return index.toString();
     }
@@ -83,7 +78,7 @@ export default class Notification extends Component {
 
     renderNoText = () => {
         return opts.renderNoText ? opts.renderNoText(this.state.notificationsList.length == 0) : <NoDataText
-            visible={this.state.notificationsList.length == 0}
+            visible={this.state.notificationsList.length == 0 && !this.state.refreshing && this.state.initial}
             text={this.state.i18n.notification.noData} />
     }
 
@@ -97,7 +92,7 @@ export default class Notification extends Component {
                 numColumns={this.props.numColumns || 2}
                 keyExtractor={this.itemKey}
                 refreshing={this.state.refreshing}
-                onRefresh={this.handleRefresh}
+                onRefresh={this.refresh}
                 data={this.state.notificationsList}
                 initialNumToRender={4}
                 renderItem={this.renderItem}
