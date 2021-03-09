@@ -93,8 +93,7 @@ const styles = StyleSheet.create({
     imageLogo: {
         height: 50,
         width: 70,
-        justifyContent: 'center',
-        tintColor: '#FFFFFF',
+        justifyContent: 'center'
     },
     imageBlur: {
         height: "100%",
