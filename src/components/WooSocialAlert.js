@@ -66,17 +66,19 @@ export default class WooSocialAlert extends React.Component {
 
     recievedMessageOnOpened = (e) => {
         this.notificationControlStatus = false;
-        this.onNotificationSave(e);
+        setTimeout(() => {
+            this.onNotificationSave(e);
+        }, 1500);
     };
 
     recievedMessageWhileOpened = (e) => {
         this.notificationControlStatus = false;
-        this.onNotificationSave(e);
+        setTimeout(() => {
+            this.onNotificationSave(e);
+        }, 1500);
     };
 
     notificationControl = async () => {
-
-
         if (!this.notificationControlStatus)
             return;
 
