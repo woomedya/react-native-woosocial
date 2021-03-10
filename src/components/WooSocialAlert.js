@@ -175,14 +175,6 @@ export default class WooSocialAlert extends React.Component {
                     resizeMode="contain"
                     style={style.alertImage}
                     source={{ uri: this.state.notificationData.Image }}
-                    placeholderStyle={style.alertPlaceholder}
-                    PlaceholderContent={
-                        <ImageReact
-                            resizeMode="contain"
-                            source={opts.logo}
-                            style={style.alertPlaceholderImage}
-                        />
-                    }
                 />
             ) : null}
 
@@ -218,12 +210,5 @@ const style = StyleSheet.create({
     },
     alertImage: {
         width: '100%', height: 150
-    },
-    alertPlaceholderImage: {
-        width: '50%',
-        height: '100%',
-    },
-    alertPlaceholder: {
-        backgroundColor: '#ffffff'
     }
 });

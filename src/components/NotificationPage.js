@@ -6,6 +6,7 @@ import NotificationCard from './NotificationCard';
 import NoDataText from './NoDataText';
 import opts from '../../config';
 import * as langStore from '../store/language';
+import WooSocialAlert from './WooSocialAlert';
 
 export default class Notification extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ export default class Notification extends Component {
             initial: false,
             refreshing: true
         };
+
+        this.wooSocialAlert = null;
     }
 
     componentDidMount() {
@@ -60,6 +63,22 @@ export default class Notification extends Component {
             this.props.openDetail(url);
     }
 
+    showNotificationAlertBox = (item) => {
+        if (this.wooSocialAlert)
+            this.wooSocialAlert.onNotificationSave({
+                notification: {
+                    payload: {
+                        title: item.title,
+                        body: item.message,
+                        additionalData: {
+                            url: item.link,
+                            image: item.image
+                        }
+                    }
+                }
+            });
+    }
+
     keyItem = (item, index) => {
         return index.toString();
     }
@@ -71,7 +90,7 @@ export default class Notification extends Component {
             message={item.message}
             date={item.createdDate}
             image={item.image}
-            onpress={this.openDetail}
+            onpress={() => { this.showNotificationAlertBox(item) }}
             urlDescription={this.state.i18n.notification.urlDescription}
         />
     }
@@ -85,6 +104,11 @@ export default class Notification extends Component {
     render() {
         return <View style={styles.container}>
             {this.renderNoText()}
+
+            <WooSocialAlert
+                ref={r => this.wooSocialAlert = r}
+                openDetail={this.openDetail}
+            />
 
             <FlatList
                 key={this.props.numColumns || "notification"}
