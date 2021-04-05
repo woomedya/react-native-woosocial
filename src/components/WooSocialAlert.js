@@ -195,6 +195,7 @@ export default class WooSocialAlert extends React.Component {
     render() {
         return this.state.notificationVisible ? (
             <AlertBox
+                visible={true}
                 title={this.state.notificationData.Title}
                 closeButtonFunc={this.alertClose}
                 content={this.renderContent()}
