@@ -44,7 +44,7 @@ export default class AlertBox extends Component {
     }
 
     render() {
-        return this.state.modalVisible && this.props.visible ? <View style={{ zIndex: 1000, elevation: 1000, backgroundColor: '#ffffff60', top: 0, bottom: 0, right: 0, left: 0, position: 'absolute' }}>
+        return this.state.modalVisible && this.props.visible ? <View style={{ zIndex: 1000, elevation: 1000, backgroundColor: '#00000080', top: 0, bottom: 0, right: 0, left: 0, position: 'absolute' }}>
             <View style={styles.root}>
                 <View style={styles.content}>
 
