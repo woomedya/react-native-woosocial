@@ -97,7 +97,7 @@ export default class WooSocialAlert extends React.Component {
 
                 lastNotification = lastNotification ? (lastSpecialNotification ? (new Date(lastNotification.date) > new Date(lastSpecialNotification.date) ? lastNotification : lastSpecialNotification) : lastNotification) : lastSpecialNotification;
 
-                if (lastNotification) {
+                if (lastNotification && this.notificationControlStatus) {
                     this.onNotificationSave({
                         notification: {
                             payload: {
