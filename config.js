@@ -12,5 +12,6 @@ export default opts = {
         LIGHT_PRIMARY: '#b9c9d8'
     },
     renderNoText: null,
-    renderItem: null
+    renderItem: null,
+    notificationCard: {}
 };

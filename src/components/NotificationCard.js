@@ -20,9 +20,9 @@ export default class NotificationCard extends Component {
     render() {
         return (
             <View style={styles.flex}>
-                <TouchableOpacity onPress={this.onpress} style={[styles.container, { borderColor: opts.color.LIGHT_PRIMARY, }]}>
+                <TouchableOpacity onPress={this.onpress} style={[styles.container, { borderColor: opts.notificationCard.containerBorderColor || opts.color.LIGHT_PRIMARY, }]}>
                     {
-                        this.props.image ? <View style={[styles.imageContainer, { backgroundColor: opts.color.PRIMARY }]}>
+                        this.props.image ? <View style={[styles.imageContainer, { backgroundColor: opts.notificationCard.imageContainerBackgroundColor || opts.color.PRIMARY }]}>
                             <View style={styles.imageBlur}>
                                 <Image
                                     style={styles.imageBlur}
@@ -38,11 +38,11 @@ export default class NotificationCard extends Component {
                                 style={styles.image}
                             />
                         </View> :
-                            <View style={[styles.imageContainer, { backgroundColor: opts.color.PRIMARY }]}>
+                            <View style={[styles.imageContainer, { backgroundColor: opts.notificationCard.imageBackgroundColor || opts.color.PRIMARY }]}>
                                 <Image
                                     style={styles.imageLogo}
                                     source={opts.logo}
-                                    resizeMode="stretch" />
+                                    resizeMode="contain" />
                             </View>
                     }
                     <View style={styles.textContainer}>
@@ -52,12 +52,12 @@ export default class NotificationCard extends Component {
                         </View>
                         <View style={styles.actionBody}>
                             <View style={styles.dateContainer}>
-                                <TimeAgo style={[styles.date, { color: opts.color.PRIMARY, }]} time={this.props.date ? this.props.date : ""} hideAgo={true} />
+                                <TimeAgo style={[styles.date, { color: opts.notificationCard.dateColor || opts.color.PRIMARY, }]} time={this.props.date ? this.props.date : ""} hideAgo={true} />
                             </View>
 
                             {
                                 this.props.url ? <View style={styles.continueContainer}>
-                                    <Text style={[styles.continue, { color: opts.color.PRIMARY, }]}>{this.props.urlDescription}</Text>
+                                    <Text style={[styles.continue, { color: opts.notificationCard.continueColor || opts.color.PRIMARY, }]}>{this.props.urlDescription}</Text>
                                 </View> : null
                             }
                         </View>
@@ -76,9 +76,7 @@ const styles = StyleSheet.create({
     container: {
         marginHorizontal: 5,
         justifyContent: "space-between",
-
         borderWidth: 0.75,
-
         overflow: "hidden"
     },
     imageContainer: {
@@ -89,6 +87,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flex: 5,
+        minHeight: 130
     },
     imageLogo: {
         height: 50,

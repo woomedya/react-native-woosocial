@@ -6,7 +6,7 @@ import WoosocialAlert from './src/components/WooSocialAlert';
 import NotificationSettingsItem from './src/components/NotificationSettingsItem';
 import * as langStore from './src/store/language';
 
-export const config = async ({ wooServerUrl, publicKey, privateKey, tokenTimeout, dummyNotificationlist, locales, color, logo, lang, renderNoText, renderItem, oneSignalAppId }) => {
+export const config = async ({ wooServerUrl, publicKey, privateKey, tokenTimeout, dummyNotificationlist, locales, color, logo, lang, renderNoText, renderItem, oneSignalAppId, notificationCard }) => {
     opts.wooServerUrl = wooServerUrl;
     opts.publicKey = publicKey;
     opts.privateKey = privateKey;
@@ -20,6 +20,7 @@ export const config = async ({ wooServerUrl, publicKey, privateKey, tokenTimeout
     opts.color = color || opts.color;
     opts.renderNoText = renderNoText || null;
     opts.renderItem = renderItem || null;
+    opts.notificationCard = notificationCard || {};
 
     if (tokenTimeout != null)
         opts.tokenTimeout = tokenTimeout;
